@@ -1,6 +1,8 @@
-# Foundations Learning Path
+# FAAST Advance Foundations
 
-Welcome to the Foundations Learning Path 🎉
+![FAAST logo](/images/FAAST_preto.png)
+
+Welcome to the FAAST Advance Foundations 🎉
 
 This course is designed to teach how to improve your coding ability with sound software engineering principles. In this introduction, you'll learn:
 
@@ -115,6 +117,8 @@ Week 08 _(~2 hours)_
 
 ## Assignments
 
-Assignments are located inside the `assignments` folder. The assignment instructions assume you are issuing commands from that folder.
+Assignments are located inside the `assignments` folder.
+
+> **Caution**: The assignment instructions assume you are issuing commands from that folder.
 
 In it, you'll find a project folder called `life_expectancy` as well as folders with instructions for each assignment. Each assignment builds upon the previous one and they are all meant to be do inside the project folder.

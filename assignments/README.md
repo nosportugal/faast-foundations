@@ -1,4 +1,4 @@
-# Foundations Learning Path Assignments
+# FAAST Advance Foundations Assignments
 
 ## Introduction
 
@@ -6,13 +6,14 @@ This assignment uses life expectancy in Europe grouped by Country (or other, lik
 
 ## Installing
 
-1. Clone this repo.
-2. Create a virtual environment with `python -m venv .venv`
-3. Activate the virtual environment with `source .venv/bin/activate` or `.venv\Scripts\activate` on Windows
-4. Install its dependencies on editable mode with `pip install -e .[dev]`.
+1. Clone this repo to your personal GitHub account.
+2. If you are not in this directory already, `cd` into it.
+3. Create a virtual environment with `python -m venv .venv`
+4. Activate the virtual environment with `source .venv/bin/activate` or `.venv\Scripts\activate` on Windows
+5. Install its dependencies on editable mode with `pip install -e .[dev]`.
 
 ## Using this project
 
 Open the `README.md` file inside each assignment and follow the instructions.
 
-> Note: Remember that all commands inside the Readme files assume you are in the root of the project.
+> **Note**: Remember that all commands inside the Readme files assume you are in the root of the project.
