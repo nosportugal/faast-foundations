@@ -61,7 +61,7 @@ A mentor are tasked in ensuring their peers become better professionals, as such
 
 In order to help mentors in tracking the progress of their groups, we suggest using the following template:
 
-- [Progress  Question Tracking template](https://docs.google.com/spreadsheets/d/1nODnLBLCcC6Dqe_pK_bog-BA78E9AuUq1l4S81Px61w/edit?usp=sharing)
+- [Progress Question Tracking template](./references/questions_and_tracking_template.xlsx)
 
 Tracking questions is important so that we can improve the quality of the selected material, as well as create new ones.
 

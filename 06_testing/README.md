@@ -20,7 +20,7 @@ After this lesson you should:
 
 ## Testing DataFrames (0:10)
 
-[Link to Testing DataFrames tutorial](https://docs.google.com/document/u/1/d/11kl09lv2I47w1i70kwBbRMBzhprw5ja2VOm6gbzyzdc)
+[Link to Testing DataFrames tutorial](./Testing&#32;Dataframes.docx)
 
 Testing data is a little bit different than testing regular Python code. In this lesson, you will learn how to test Pandas and Pyspark DataFrames.
 

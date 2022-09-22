@@ -16,7 +16,7 @@ After this lesson you should:
 
 ## Setting up VS Code for Python development (0:10)
 
-[Link to document](https://docs.google.com/document/u/1/d/1xHJ9Kq9OVsWh4OH8DYB_7dsKW2tzCPZ8FOI9VrGU2SU)
+[Link to "Setting up VS Code for Python"](./Setting&#32;up&#32;VS&#32;Code&#32;for&#32;Python.docx)
 
 This document helps you setup VS Code's Test Explorer, Tasks. It also provides some plugins recommendations.
 
