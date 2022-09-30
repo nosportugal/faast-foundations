@@ -1,5 +1,7 @@
 # Clean Code
 
+> **Note**: The videos in this module are quite long, so we suggest you watch the first one on the first week and the second one on the second week.
+
 People who write code are often not the same people who maintain it. Trying to understand an unfamiliar codebase to fix a bug in production is already stressful enough, but trying to understand _badly written_ code is even worse.
 
 ![Reading bad code can be quite the adventure](../images/67178102e022f9ea214baf9f58f0e44fcdef9a123c64e3abf70cee8ba00bc511.png)  
