@@ -54,11 +54,11 @@ After this lesson you should:
 
 ## Python Type Checking (Guide) (1:40)
 
-![RealPython cover](../images/4b3cc00ea7b463fb46c2dfbe07beab3d6e708384e6938b82cc3e4f65767da9e2.png)  
+![Code with Tim cover](../images/type_hints.png)
 
-[Link to RealPython guide](https://realpython.com/python-type-checking/)
+[Link to video](https://youtu.be/QORvB-_mbZ0)
 
-This is a very complete guide on Python type hints from _RealPython_. It's a comprehensive guide that covers a lot of ground and a good piece to keep for future reference.
+In this video, Tim explains what are type hints. The explanations are very clear and concise, and he also shows how to use them in your code.
 Type hints are optional in Python, but using them will allow you to catch bugs before they happen, and allow readers to understand your classes and functions just by looking at their signatures.
 
 After this lesson you should:
@@ -66,3 +66,5 @@ After this lesson you should:
 - Learn how to add type hints to your code,
 - Be able to create type aliases,
 - Know how to run a static type checker like `mypy`.
+
+> **Note**: Ever since [Python 3.9](https://docs.python.org/3/whatsnew/3.9.html#type-hinting-generics-in-standard-collections) we are no longer required to import `List` and `Dict` from the `typing` module. Instead we can use `list` and `dict` as a type hint directly, just as we use `int`, `str`, and `bool`. So Tim's `List[List[int]]` example can now be written as `list[list[int]]` instead.
