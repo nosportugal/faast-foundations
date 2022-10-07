@@ -88,34 +88,37 @@ Week 03 _(~1.5 hours)_
 
 - Linting
 - Continuous integration
+
+Week 04 _(~2 hours)_
+
 - Assignment #1
 
-Week 04 _(~1.5 hours)_
+Week 05 _(~1.5 hours)_
 
 - Git strategies
 - Code reviews
 - Assignment #2
 
-Week 05 _(~3 hours)_
+Week 06 _(~3 hours)_
 
 - Testing
 - Project structure
 - Text editors
 
-Week 06 _(~2 hours)_
+Week 07 _(~2 hours)_
 
 - Assignment #3
 
-Week 07 _(~2.5 hours)_
+Week 08 _(~2.5 hours)_
 
 - Object-oriented programming
 
-Week 08 _(~2.5 hours)_
+Week 09 _(~2.5 hours)_
 
 - Design patterns
 - Packaging and publishing
 
-Week 09 _(~2 hours)_
+Week 10 _(~2 hours)_
 
 - Assignment #4
 
