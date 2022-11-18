@@ -32,16 +32,16 @@ This video shows you tips and shortcuts than can really make your life easier wh
 
 ## Assignment #3
 
-It's finally time for Assignment #3!
+Next week is finally the time for Assignment #3!
 
 > **Note**: This assignment will require your code to be reviewed by your peers.
 
 This assignment is about creating tests. It's not the more joyful of tasks - particularly for existing code - but it's oh so important.
 
-### Assignment #2 covers
+### Assignment #3 covers
 
 - Creating tests
 - Creating test fixtures
 - Mocking methods and objects
 
-`cd` into the `assignments` folder, good luck and see you on the other side!
+`cd` into the `assignments` folder, good luck, and see you on the other side!
