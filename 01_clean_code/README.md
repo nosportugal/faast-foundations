@@ -52,7 +52,7 @@ After this lesson you should:
 - Know about _lying comments_ and when _not_ to write comments,
 - Be able to reveal your intent while naming things.
 
-## Python Type Checking (Guide) (1:40)
+## Python Type Checking (Guide) (0:25)
 
 ![Code with Tim cover](../images/type_hints.png)
 
