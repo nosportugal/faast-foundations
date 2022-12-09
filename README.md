@@ -59,11 +59,11 @@ A mentor are tasked in ensuring their peers become better professionals, as such
 
 ## Progress and Questions Tracking
 
-In order to help mentors in tracking the progress of their groups, we suggest using the following template:
+Progress tracking is to be done at the [NOS CAMPUS](https://nos.csod.com/ui/lms-learning-details/app/curriculum/ce07176b-63a4-4833-bffa-f183ac07239a) platform. This is meant for HR to measure completion rates, collect feedback and other quality metrics.
 
-- [Progress Question Tracking template](./references/questions_and_tracking_template.xlsx)
+However, if you are a mentor, it's also useful for you to keep you own records of how your group's progress and questions. Tracking questions is important so that we can improve the quality of the selected material, as well as create new ones.
 
-Tracking questions is important so that we can improve the quality of the selected material, as well as create new ones.
+In order to help mentors in tracking the progress of their groups, you may find it useful to use this [template](./references/questions_and_tracking_template.xlsx):
 
 ## Pre-requisites
 
