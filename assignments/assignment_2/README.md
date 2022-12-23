@@ -10,7 +10,9 @@ Refactor the code to have 3 functions: `load_data`, `clean_data`, and `save_data
 
 All three functions should be called from a `main` function. Don't forget to ensure the tests still work with the `main` function.
 
-You can do this in a new branch called `refactoring`. When you are done, create a pull request from `refactoring` to `main`. Don't merge it yet!
+We can do this in a new branch called `refactoring`.
+
+When you are done, create a pull request from `refactoring` to `main`. Don't merge it yet!
 
 ## 2- Code Review
 
@@ -25,3 +27,25 @@ Assign a colleague to review your code. You should receive to opportunity to rev
 - Are the functions stored in modules with semantic meaning?
 
 You'll probably have to tweak your own code based on your peer's feedback as well. Only merge it once the reviewer approves it.
+
+### About the code review
+
+The reviewer will only have access to code that's different from the `main` branch. This means that the reviewer will not be able to see the code from the previous lesson. Because this is the first contact the reviewer will have with your repository, it might be useful for the reviewer so see all your code. You can do this by creating a second pull request to an empty branch. This is how you can do it:
+
+1. Create an empty branch called `empty_branch`:
+
+    ```bash
+    git checkout --orphan empty_branch
+    git rm -rf .
+    git commit --allow-empty -m "root commit"
+    git push origin empty_branch
+
+    git checkout refactoring
+    git merge empty_branch --allow-unrelated-histories
+    git push origin refactoring
+    ```
+
+2. Create a pull request from `refactoring` to `empty_branch`.
+3. Assign a colleague to review your code.
+4. After the review, merge the pull request.
+5. Finally a pull request from `refactoring` to `main` or simply merge the `refactoring`.
