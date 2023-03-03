@@ -7,11 +7,11 @@ There are 2 parts to this assignment: cleaning the data and ensuring good code q
 
 Let's break it down:
 
-```bash
+```
 assignments
 ├── life_expectancy    # This directory contains the package you'll be creating on the assignment
-| ├── data             # Data files are to be kept in this directory
-| └── tests            # Directory for tests. `pytest`, our testing framework, will try to find this folder and run all 
+|  ├── data            # Data files are to be kept in this directory
+|  └── tests           # Directory for tests. `pytest`, our testing framework, will try to find this folder and run all 
 |                      #   tests inside it.
 ├── pyproject.toml     # Meta-information about the project, like the author's name, the version, the dependencies, and 
 |                      #   instructions of how some developer tools are to be run.
@@ -19,6 +19,10 @@ assignments
 ```
 
 The datafiles are in TSV format in wide format. The first column is a composed one, containing 4 different information (unit, sex, age, geo). The next columns are temporal values, the life expectancy in years.
+
+Before you start is always a good idea to peek into the data file to see how it actually looks like. 😉
+
+You can do this either with the pandas library (already included in the project's dependencies) or, since this is a very small data file, by simply opening it.
 
 These are the code requirements for part one:
 
