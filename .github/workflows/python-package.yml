@@ -37,5 +37,6 @@ jobs:
         pylint life_expectancy.cleaning
     - name: Test with pytest
       run: |
+        pwd
         cd assignments
         pytest life_expectancy --cov
