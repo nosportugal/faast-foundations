@@ -1,5 +1,7 @@
 # FAAST Advance Foundations
 
+[![Python package](https://github.com/gabrieldiasmp/faast-foundations/actions/workflows/python-package.yml/badge.svg)](https://github.com/gabrieldiasmp/faast-foundations/actions/workflows/python-package.yml)
+
 ![FAAST logo](/images/FAAST_preto.png)
 
 Welcome to the FAAST Advance Foundations 🎉
