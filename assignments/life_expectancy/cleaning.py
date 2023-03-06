@@ -1,8 +1,10 @@
 """It cleans a dataset and exports it"""
 
+import argparse
 import pandas as pd
 
 def clean_data(
+    region="PT",
     path_input='life_expectancy/data/eu_life_expectancy_raw.tsv',
     path_output='life_expectancy/data/pt_life_expectancy.csv') -> pd.DataFrame:
     """Imports data and make some transformations
@@ -14,6 +16,8 @@ def clean_data(
     Returns:
         pandas DataFrame: cleaned data
     """
+
+    print(f"----------- selected region: {region} -----------")
 
     life_expectancy = pd.read_csv(path_input,sep='\t')
 
@@ -43,11 +47,18 @@ def clean_data(
     life_expectancy = life_expectancy.dropna()
 
     # Filtering only observations about PT
-    life_expectancy = life_expectancy[life_expectancy["region"] == "PT"]
+    life_expectancy = life_expectancy[life_expectancy["region"] == region]
 
     life_expectancy.to_csv(path_output, index=False)
+
+    print(life_expectancy.head())
 
     return life_expectancy
 
 if __name__ == "__main__":  # pragma: no cover
-    clean_data()
+
+    parser = argparse.ArgumentParser(description='Inputs for cleaning function')
+    parser.add_argument('--region', default="PT", type=str, help='The region to be selected')
+    args = parser.parse_args()
+
+    clean_data(region=args.region)
