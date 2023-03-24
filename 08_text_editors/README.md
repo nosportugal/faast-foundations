@@ -24,6 +24,10 @@ This document helps you setup VS Code's Test Explorer, Tasks. It also provides s
 
 ![8 Tips to SKYROCKET your Python Productivity on VS Code](../images/10b7c07302d9be872cb991d9c1784df7bf45bbb770db80925415605cf49129b4.png)  
 
+Note that is you are on a ThinkPad the shortcuts are different then presented in this video:
+* comment multiple lines: Crtl + ^ (rather then Crtl + / )
+* peek defintion: doesn't seem to be working with Atl + F12 so you can use Crtl + Shit + P and the write peek folowed by enter
+
 [Link to video](https://youtu.be/slHzJh6pGo8)
 
 This video shows you tips and shortcuts than can really make your life easier when using VS Code.
