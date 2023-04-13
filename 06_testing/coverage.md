@@ -26,7 +26,7 @@ pytest tests/ --cov
 
 ## HTML Reports
 
-Sometime you want to see exactly what lines are not being covered by tests. To answer that question, you can generate an HTML report.
+Sometimes you want to see exactly what lines are not being covered by tests. To answer that question, you can generate an HTML report.
 
 ### Using `pytest-cov` plugin
 
