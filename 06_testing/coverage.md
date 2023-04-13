@@ -22,7 +22,7 @@ Then run `pytest` with the `--cov` flag:
 pytest tests/ --cov
 ```
 
-> **Note**: Remember that a high coverage doesn't guarantee bug-free code, as it only shows which parts of the code are executed during testing, not if the tests are effective or meaningful. Don't writ unnecessary tests just to increase coverage.
+> **Note**: Remember that a high coverage doesn't guarantee bug-free code, as it only shows which parts of the code are executed during testing, not if the tests are effective or meaningful. Don't write unnecessary tests just to increase coverage.
 
 ## HTML Reports
 
