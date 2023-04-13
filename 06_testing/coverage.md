@@ -1,6 +1,6 @@
 # Test Coverage
 
-Test coverage is a software development metric that measures the how much of your code is covered by tests. It's typically expressed as a percentage, where higher percentages indicate more extensive testing.
+Test coverage is a software development metric that measures how much of your code is covered by tests. It's typically expressed as a percentage, where higher percentages indicate more extensive testing.
 
 Test coverage is important for several reasons:
 
