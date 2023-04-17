@@ -7,7 +7,7 @@ There are 2 parts to this assignment: cleaning the data and ensuring good code q
 
 Let's break it down:
 
-```
+```text
 assignments
 ├── life_expectancy    # This directory contains the package you'll be creating on the assignment
 |  ├── data            # Data files are to be kept in this directory
@@ -54,15 +54,25 @@ For this refactoring section, we have 3 activities:
 Now, let's create a CI pipeline for this project. We will use GitHub Actions for this.
 
 1. Create a new repo for this project on GitHub.
+   1. Give your repository a name, and choose whether it should be public or private.
+   2. GitHub will prompt you to create a `README.md`, `.gitignore`, or license file, but since you already have a local repository, you should skip this step. Just click the "Create repository" button.
+2. Push your code to GitHub.
    1. Ensure your code follows the structure described above. It can have other files, but it should have the `life_expectancy` folder (and your code in it), the `README.md` and `pyproject.toml` on the project root.
    2. It should have a `.gitignore` file. You can read more information on what it is [here](https://www.freecodecamp.org/news/gitignore-what-is-it-and-how-to-add-to-repo/) and [here](https://github.com/github/gitignore/blob/main/Python.gitignore) is a good example to use for python projects.
-   3. Push your code to GitHub.
-2. Create a new branch called `ci`. The pipeline should:
+   3. Add the remote repository you've just created to your local repository. You can do this by running `git remote add origin https://github.com/your-username/your-repo-name.git`. , Replace `your-username` with your GitHub username and your-repo-name with the name of the repository you created on GitHub
+   4. Push your code to GitHub
+
+   ```bash
+   git branch -M main
+   git push -u origin main
+   ```
+
+3. Create a new branch called `ci`. The pipeline should:
    1. Run `pytest` on the code
    2. Run `pylint` on the code.
    3. Be triggered on every push to the `main` branch and every pull request update.
-3. Create a pull request from `ci` to `main`. Don't merge it yet! If the workflow triggers were correct, GitHub should try to run the workflow. If it doesn't or if it fails, try to fix it with additional commits to the `ci` branch.
-4. Add a badge to the `README.md` file that shows the status of the pipeline. You can find the badge in the `Actions` tab of the repo. Select the workflow run and then click the "..." button: a "Create status badge" option should appear. Open the `ci` branch on your local machine (a quick way to do this, if you haven't created a local `ci` branch yet, is to use the `git switch ci` command), paste the provided markdown to the project's `README.md` and push this commit.
-5. Merge the pull request when the pipeline succeeds.
+4. Create a pull request from `ci` to `main`. Don't merge it yet! If the workflow triggers were correct, GitHub should try to run the workflow. If it doesn't or if it fails, try to fix it with additional commits to the `ci` branch.
+5. Add a badge to the `README.md` file that shows the status of the pipeline. You can find the badge in the `Actions` tab of the repo. Select the workflow run and then click the "..." button: a "Create status badge" option should appear. Open the `ci` branch on your local machine (a quick way to do this, if you haven't created a local `ci` branch yet, is to use the `git switch ci` command), paste the provided markdown to the project's `README.md` and push this commit.
+6. Merge the pull request when the pipeline succeeds.
 
 [^1]: Do you want to know what the `--cov` flag does? It's a flag for the `pytest` command that tells it to run the code coverage tool. You can read more about it [here](../../06_testing/coverage.md).
