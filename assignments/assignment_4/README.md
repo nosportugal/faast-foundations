@@ -14,9 +14,9 @@ The focus of this (final) assignment is about OOP and design patterns. And we ha
 
 Ok, the final stretch. You can do this. Passing a country as a string is not very safe (imprecise types are a code smell). We can use an enum to make sure that we only pass valid countries.
 
-1. Create an `enum.Enum` called `Country` with possible country values.
-2. Then, modify the necessary functions and tests to accept a `Country` instead of a string. Don't forget the type hints.
-3. Finally, add a class method to `Country` that returns a list of all the _actual_ countries (so, it removes values like EU28, EFTA, etc). Add a test for this method.
+1. Create an `enum.Enum` called `Country` or `Region` with possible country values.
+2. Then, modify the necessary functions and tests to accept a `Country`/`Region` instead of a string. Don't forget the type hints.
+3. Finally, add a class method to `Country`/`Region` that returns a list of all the _actual_ countries (so, it removes values like EU28, EFTA, etc). Add a test for this method.
 
 ## 3- Code Review
 
