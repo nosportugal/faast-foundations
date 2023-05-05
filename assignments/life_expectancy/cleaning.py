@@ -9,6 +9,7 @@ import numpy as np
 AUX_NAME_INFILE = "eu_life_expectancy_raw.tsv"
 AUX_NAME_OUTPUT= "pt_life_expectancy.csv"
 AUX_DATA_PATH = Path(__file__).parent / 'data'
+AUX="JOAO"
 #funcao clifeandata
 
 def clean_data(
