@@ -33,4 +33,4 @@ jobs:
         pylint assignments/life_expectancy
     - name: Test with pytest
       run: |
-        pytest tests --cov
+        pytest assignments/life_expectancy/tests --cov
