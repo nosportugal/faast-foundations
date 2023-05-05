@@ -32,7 +32,7 @@ jobs:
     - name: Lint with pylint
       run: |
         # Realizar validacao do codigo para a pasta do projeto
-        pylint life_expectancy
+        pylint assignments/life_expectancy
   
     - name: Test with pytest
       run: |
