@@ -30,7 +30,7 @@ jobs:
         python -m pip install pylint pytest pytest-cov pandas
     - name: Lint with pylint
       run: |
-        pylint life_expectancy
+        pylint assignments/life_expectancy
     - name: Test with pytest
       run: |
         pytest tests --cov
