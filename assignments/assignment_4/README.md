@@ -7,7 +7,7 @@ The focus of this (final) assignment is about OOP and design patterns. And we ha
 ## 1- Design Patterns
 
 1. Copy the JSON data from the `assignment_4` folder to the `life_expectancy/data` folder.
-2. Refactor your code so that is can accept and clean data in other formats if necessary. You can use the [Strategy pattern](https://refactoring.guru/design-patterns/strategy) for this, but you can also use a different one if you prefer.
+2. Refactor your code so that it can accept and clean data in other formats if necessary. You can use the [Strategy pattern](https://refactoring.guru/design-patterns/strategy) for this, but you can also use a different one if you prefer.
 3. Create the new tests for your solution. Don't forget to run an end-to-end test for the pipeline using JSON data.
 4. Ensure you still have complete test coverage and a high `pylint` score. 
 
