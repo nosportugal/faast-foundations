@@ -14,13 +14,13 @@ After this lesson you should:
 - Know about _lying comments_ and when _not_ to write comments,
 - Be able to reveal your intent while naming things.
 
-## Python Type Checking (Guide) (0:25)
+## Python Type Checking (Guide) (1:40)
 
-![Code with Tim cover](../images/type_hints.png)
+![RealPython cover](../../images/4b3cc00ea7b463fb46c2dfbe07beab3d6e708384e6938b82cc3e4f65767da9e2.png)  
 
-[Link to video](https://youtu.be/QORvB-_mbZ0)
+[Link to RealPython guide](https://realpython.com/python-type-checking/)
 
-In this video, Tim explains what are type hints. The explanations are very clear and concise, and he also shows how to use them in your code.
+This is a very complete guide on Python type hints from _RealPython_. It's a comprehensive guide that covers a lot of ground and a good piece to keep for future reference.
 Type hints are optional in Python, but using them will allow you to catch bugs before they happen, and allow readers to understand your classes and functions just by looking at their signatures.
 
 After this lesson you should:
@@ -29,8 +29,10 @@ After this lesson you should:
 - Be able to create type aliases,
 - Know how to run a static type checker like `mypy`.
 
-> **Notes**:
-> >
-> - The `Optional[X]` type is a shorthand notation for `Union[X, None]`, where `X` is your argument type. It can be used whenever you wish to indicate that a value can be `None` or of type `X`.
-> - Ever since [Python 3.10](https://peps.python.org/pep-0604/) you can also use the `|` operator to indicate unions, so `Optional[X]` is also equivalent to `X | None`.
-> - Since [Python 3.9](https://docs.python.org/3/whatsnew/3.9.html#type-hinting-generics-in-standard-collections) we are no longer required to import `List` and `Dict` from the `typing` module. Instead we can use `list` and `dict` as a type hint directly, just as we use `int`, `str`, and `bool`. So Tim's `List[List[int]]` example can now be written as `list[list[int]]` instead.
+Nowadays, VSCode usually comes with a type checked installed by default. But the button to activate is easy to miss. If you have a type checker installed, you should see a button like this one on the bottom bar of your VSCode window:
+
+![Activate type checking on VSCode](../../images/activate_type_checking.png)
+
+Now you should see the errors and warnings in your code in the "Problems" tab (it sits next to your integrated terminal window). Personally, I like to use the [Error Lens](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens) add-on to make the errors and warnings more visible:
+
+![Error Lens add-on](../../images/error_lens.png)
