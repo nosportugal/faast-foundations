@@ -129,3 +129,9 @@ Assignments are located inside the `assignments` folder.
 > **Caution**: The assignment instructions assume you are issuing commands from that folder.
 
 In it, you'll find a project folder called `life_expectancy` as well as folders with instructions for each assignment. Each assignment builds upon the previous one and they are all meant to be do inside the project folder.
+
+## Call to Adventure
+
+The goal of this course is to be your personal companion on being a better programmer. We hope you enjoy it and learn a lot from it.
+
+Feel free to open [GitHub issues](https://github.com/nosportugal/faast-foundations/issues) to give us feedback and ideas for new features. Or even better, open a [pull request](https://github.com/nosportugal/faast-foundations/pulls) with your suggestions.
