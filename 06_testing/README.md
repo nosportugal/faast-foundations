@@ -1,22 +1,50 @@
 # Testing
 
-## How to write unit tests for existing Python code (0:42)
+## Introduction to Unit Testing with PyTest (0:35)
 
-![Using tests to refactor a codebase](../images/b0bf092008be10cffa9b30080256114a74fcfc6615880045ab77892cb66d7b81.png)  
+![Unit Testing with PyTest](./../images/unit-test-with-pytest-cover.png)
 
-- Part 1 - [Link to YouTube video](https://youtu.be/ULxMQ57engo)
-- Part 2 - [Link to YouTube video](https://youtu.be/NI5IGAim8XU)
+[Link to video](https://youtu.be/YbpKMIUjvK8)
 
-This 45min video covers a practical example of adding unit tests to existing code, followed by a refactoring of the code. It's a great example of how to use tests to refactor code. You will get a sense on how refactoring can simplify test while improving the design.
+This video is meant to be your first contact with Pytest. It will show you how to write unit tests for a simple shopping cart application..
 
-After this lesson you should:
+- Unit tests are functions that check if your code or application works as intended.
+- If the application works correctly, tests should pass. If there's a bug or improper implementation, tests should fail.
+- Unit tests allows you to quickly detect problem when you are making changes to existing code. This is especially important when working in a team.
+- Refactoring without unit tests can be risky.
+- Unit tests ensure new functionality doesn't break existing code.
 
-- Learn the criteria to use when selecting what piece of code to test first,
-- Learn how to use the `pytest` framework,
-- Know about `mock` objects, and how to use `pytest-monkeypatch`,
-- See an example of dependency injection to make code more testable.
+After this lesson you should know:
 
-> **Note**: The author shows a `coverage` report. The package `pytest-cov` is a `pytest` plugin that generates coverage reports by adding the option `--cov` to your testing command.
+- The basics of Pytest: Understand the importance of unit tests, how to set up PyTest, and the conventions for writing and naming tests.
+- How to write and run specific tests, including checking for exceptions.
+- Some best practices: Like making sure tests fail for the right reasons, and get introduced to the concept of reducing duplicate code in tests with fixtures.
+
+## More on Mock objects (0:07)
+
+In the last video you were introduced by the concept of mock objects, where the author replaced a parameter with a mock object. However, that's not something we usually do. This is because we don't have access to the thing we want to mock most of the times.
+
+For example, in your homework, you will have to test a function that uses pandas' `read_csv` function. The `read_csv` method is inside the function: you can't access it directly to replace it with a mock object. That's why you need to use the `patch` decorator.
+
+A couple of warnings about the next video:
+
+1. It uses the `python.unittest` framework instead of `pytest`. The concepts are the same, but the syntax is a little different. However, the important thing is that the way you use patches and mocks also work for pytest.
+2. From the 3:30 to the 4:15 mark, the author talks about the "setups" and "teardowns. This is the only part that's specific to `unittest`. You can skip it.
+
+![mock patch in seven minutes](./../images/mock-path-seven-minutes.png)
+
+[Link to video](https://youtu.be/_OyuFg9pGQg)
+
+## Fixtures
+
+Fixtures are the building blocks of Pytest.
+
+> **Warning**: Hello REVIEWER! I'm talking to you! We have 2 different articles to chose for this part:
+>
+> The [first link is a cheat sheet](https://www.tutorialspoint.com/pytest/pytest_quick_guide.htm#pytest-conftest.py). It's a little bit more concise, but because it never actually tests outside functions, they may give students the wrong mindset.
+> The [second link is a how-to guide from Pytest's docs](https://docs.pytest.org/en/latest/how-to/fixtures.html). It's a little bit more complete and incentivises people to rely on the docs, but it mixes up beginner and advanced topics (we will only ask up to the "Dynamic scope" session which may be too advanced)
+>
+> So would you please chose the one you think is best? Thanks!
 
 ## Testing DataFrames (0:10)
 
@@ -41,3 +69,10 @@ There are 2 things you should always have:
 What about the private functions? Those function that start with a `_` or a `__`? You don't really need to test those. The other problem with testing internal functions is that it increases the likelihood of your tests failing for the wrong reasons. For example, when changing something internal, that doesn't break anything but forces you to spend a long time updating all tests.
 
 But what if the internal function is critical to the application? If you really believe a particular internal function should be tested, that's a strong indicator it should be decoupled. Move it to a module of its own and make that function public.
+
+## Extra resources
+
+These are optional, but hey can be useful if you want to learn more about testing.
+
+- [Code coverage](coverage.md) - What is code coverage and how to use it with `pytest`.
+- [Pytest's `Monkeypatch`](https://docs.pytest.org/en/latest/how-to/monkeypatch.html) - Pytest's version of mock objects is called `Monkeypatch`. They work a little differently and are not as flexible as `unittest`'s mock objects, but they are easier to use. We won't cover them here, but here's a nice - and official - resource on how to use them.
