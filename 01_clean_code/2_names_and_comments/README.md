@@ -4,6 +4,8 @@ Let's continue our journey to write better code. In this module we will focus on
 
 ## Uncle Bob - Clean code lesson 2 (1:06)
 
+![Junior dev writing comments](../../images/junior-devs-writing-comments.png)
+
 [Link to video](https://www.youtube.com/watch?v=2a_ytyt9sf8)
 
 In the second part of the "Coding Better World Together", Uncle Bob focuses on the clean code rules for comments and rules to write names.
@@ -16,7 +18,7 @@ After this lesson you should:
 
 ## Python Type Checking (Guide) (0:25)
 
-![Code with Tim cover](../images/type_hints.png)
+![Code with Tim cover](../../images/type_hints.png)
 
 [Link to video](https://youtu.be/QORvB-_mbZ0)
 
@@ -34,3 +36,11 @@ After this lesson you should:
 > - The `Optional[X]` type is a shorthand notation for `Union[X, None]`, where `X` is your argument type. It can be used whenever you wish to indicate that a value can be `None` or of type `X`.
 > - Ever since [Python 3.10](https://peps.python.org/pep-0604/) you can also use the `|` operator to indicate unions, so `Optional[X]` is also equivalent to `X | None`.
 > - Since [Python 3.9](https://docs.python.org/3/whatsnew/3.9.html#type-hinting-generics-in-standard-collections) we are no longer required to import `List` and `Dict` from the `typing` module. Instead we can use `list` and `dict` as a type hint directly, just as we use `int`, `str`, and `bool`. So Tim's `List[List[int]]` example can now be written as `list[list[int]]` instead.
+
+Nowadays, VSCode usually comes with a type checked installed by default. But the button to activate is easy to miss. If you have a type checker installed, you should see a button like this one on the bottom bar of your VSCode window:
+
+![<img src="../../images/activate_type_checking.png" alt="Activate type checking on VSCode" width="300"/>](../../images/activate_type_checking.png)
+
+Now you should see the errors and warnings in your code in the "Problems" tab (it sits next to your integrated terminal window). Personally, I like to use the [Error Lens](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens) add-on to make the errors and warnings more visible:
+
+![Error Lens add-on](../../images/error_lens.png)
