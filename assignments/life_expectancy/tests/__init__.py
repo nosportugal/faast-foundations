@@ -2,5 +2,7 @@
 from pathlib import Path
 
 
-FIXTURES_DIR = Path(__file__).parent / "fixtures"
-OUTPUT_DIR = Path(__file__).parent.parent / "data"
+PROJECT_DIR = Path(__file__).parents[2]
+PACKAGE_DIR = PROJECT_DIR / "life_expectancy"
+FIXTURES_DIR = PACKAGE_DIR / "tests" / "fixtures"
+OUTPUT_DIR = PACKAGE_DIR / "data"
