@@ -37,14 +37,9 @@ A couple of warnings about the next video:
 
 ## Fixtures
 
-Fixtures are the building blocks of Pytest.
+Fixtures are the building blocks of Pytest, so it's important to understand how they work. Luckily, they are not that complicated and Pytest has a great "how to" tutorial on them.
 
-> **Warning**: Hello REVIEWER! I'm talking to you! We have 2 different articles to chose for this part:
->
-> The [first link is a cheat sheet](https://www.tutorialspoint.com/pytest/pytest_quick_guide.htm#pytest-conftest.py). It's a little bit more concise, but because it never actually tests outside functions, they may give students the wrong mindset.
-> The [second link is a how-to guide from Pytest's docs](https://docs.pytest.org/en/latest/how-to/fixtures.html). It's a little bit more complete and incentivises people to rely on the docs, but it mixes up beginner and advanced topics (we will only ask up to the "Dynamic scope" session which may be too advanced)
->
-> So would you please chose the one you think is best? Thanks!
+Jump to their ["How to use fixtures"](https://docs.pytest.org/en/latest/how-to/fixtures.html) section and read until the "Dynamic scope" session. This should take you about 10 minutes and it covers the most important parts of fixtures. The rest of the page are more advanced use cases. You can skip them.
 
 ## Testing DataFrames (0:10)
 
