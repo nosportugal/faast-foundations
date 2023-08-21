@@ -2,7 +2,9 @@
 
 ## Introduction
 
-This assignment uses life expectancy in Europe grouped by Country (or other, like group of countries), Age, Sex, and Time. But the data format makes it hard to use. The task consists into cleaning the data and applying the concepts you've learned in the previous modules.
+We are going to be using this project throughout the course.
+
+This assignment uses life expectancy in Europe grouped by Country (or other, like group of countries), Age, Sex, and Time. But the data format makes it hard to use. We will be building a pipeline do clean the data, while applying the concepts you've learned in the previous modules.
 
 ## Installing
 
@@ -24,27 +26,24 @@ Now you're ready to go!
 
 1. Clone the Faast-Foundations repo and, from it, create a new repo with just the assignments:
 
-  ```bash
-  git clone git@github.com:nosportugal/faast-foundations.git
-  cp -r faast-foundations/assignments assignments
-  cd assignments
-  git init
-  ```
-  
-   You will be later pushing this new repo to your personal GitHub account.
+    ```bash
+    git clone git@github.com:nosportugal/faast-foundations.git
+    cp -r faast-foundations/assignments assignments
+    cd assignments
+    git init
+    ```
+
+    You will be later pushing this new repo to your personal GitHub account.
 
 2. Create a virtual environment with `python -m venv .venv`. If you are using conda, you can create a virtual environment with `conda create --name foundations pip`.
 3. Activate the virtual environment with `source .venv/bin/activate` or `.venv\Scripts\activate` on Windows. Or, if you are on conda, activate the environment with `conda activate foundations`.
-4. Install its dependencies on editable mode with:
 
-  ```bash
-  pip install -e '.[dev]'
-  ```
-  
-  And now you should be ready to get started!
+Don't install the project yet. We will do that in [setup assignment](./assignment_0/README.md).
 
 ## Using this project
 
 Open the `README.md` file inside each assignment and follow the instructions.
 
 > **Note**: Remember that all commands inside the Readme files assume you are in the root of the project.
+
+You can now start working on the [setup assignment](./assignment_0/README.md). Good luck! 🚀
