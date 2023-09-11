@@ -12,7 +12,7 @@ This video shows you tips and shortcuts that can really make your life easier wh
 
 > **One shortcut to rule them all**: If you want to search for any shortcuts on VSCode, use `Ctrl + K` followed by `Ctrl + S` to open the keyboard shortcuts menu.
 
-Note that, depending on your keyboard, the shortcuts may differ. Here are some options we found (thanks [3lueLightning](https://github.com/3lueLightning) and [timefonseca](https://github.com/timafonseca)):
+Note that, depending on your keyboard, the shortcuts may differ. Here are some options we found (thanks [3lueLightning](https://github.com/3lueLightning) and [timafonseca](https://github.com/timafonseca)):
 
 - comment toggle: `Crtl + ^` or `Ctrl + ~` (instead of `Crtl + /` )
 - peek definition: doesn't seem to be working with `Atl + F12` so you can use `Crtl + Shift + P` and the write peek followed by enter
