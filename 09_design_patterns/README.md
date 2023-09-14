@@ -14,15 +14,15 @@ They can be divided into:
 
 Creational design patterns are design patterns that deal with object creation mechanisms. The basic form of object creation could result in design problems or added complexity to the design. Creational design patterns try solve this.
 
-In  this module, the creational patterns we are going to cover is the [`Factory` pattern](#factory-pattern).
+In  this module, the creational patterns we are going to cover is the [`Factory` pattern](#factory-pattern-015).
 
 ## Structural patterns
 
-Structural patterns are design patterns that ease the design by identifying a simple way to manage relationships between entities. In this module, the structural patterns we are going to cover is the [`Adapter` pattern](#adapter-pattern).
+Structural patterns are design patterns that ease the design by identifying a simple way to manage relationships between entities. In this module, the structural patterns we are going to cover is the [`Adapter` pattern](#adapter-pattern-023).
 
 ## Behavioral patterns
 
-Behavioral patterns are design patterns that handle common communication patterns between objects. By doing so, these patterns increase flexibility in carrying out this communication. In this module, the behavioral patterns we are going to cover is the [`Strategy` pattern](#strategy-pattern) and the [`Command` pattern](#command-pattern).
+Behavioral patterns are design patterns that handle common communication patterns between objects. By doing so, these patterns increase flexibility in carrying out this communication. In this module, the behavioral patterns we are going to cover is the [`Strategy` pattern](#strategy-pattern-027) and the [`Command` pattern](#command-pattern-032).
 
 ## Inheritance and Composition (0:45)
 
@@ -40,11 +40,11 @@ This guide covers the differences and tradeoffs between inheritance and composit
 
 The Strategy pattern is a great way to reduce coupling and separate business rules from code logic.
 
-This video covers the Strategy pattern, but also looks at a few varieties of the pattern using Python features such as Protocol classes, dataclasses, the _call_ dunder method, and closures. The author also answers a lot of questions in the comments.
+This video covers the Strategy pattern, but also looks at a few varieties of the pattern using Python features such as Protocol classes, `dataclasses`, the _call_ dunder method, and closures. The author also answers a lot of questions in the comments.
 
 After this video, you should be able to:
 
-- Apply the pattern using both Protocol and dataclasses
+- Apply the pattern using both Protocol and `dataclasses`
 
 ## Adapter Pattern (0:23)
 
@@ -69,3 +69,12 @@ In this video, you'll learn how the Command pattern work by implementing "undo" 
 [Link to video](https://www.youtube.com/watch?v=s_4ZrtQs8Do)
 
 With the (Abstract) Factory pattern, you can separate creation from usage. It allows, for example, to create objects without specifying the exact class of object that will be created. This video explains what the Factory pattern is, and how to use it in Python.
+
+---
+
+## Assignment #5
+
+It's the final assignment! Are you ready? If so, chaaaarge! ╰（‵□′）╯
+
+> **Note**: This assignment will require your code to be reviewed by your peers.
+This assignment is about using design patterns to improve your code maintainability.

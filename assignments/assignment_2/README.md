@@ -49,3 +49,28 @@ The reviewer will only have access to code that's different from the `main` bran
 3. Assign a colleague to review your code.
 4. After the review, merge the pull request.
 5. Finally a pull request from `refactoring` to `main` or simply merge the `refactoring`.
+
+## 3- Project Structure
+
+In the final part of the assignment, let's move to some real-world code.
+
+## 1- Project restructuration
+
+Let's discuss projects from your work. Select a current or older project that took part in. Let's review its organization:
+
+1. What would you change? Why?
+2. What would you keep? Why?
+
+## 2- Third-party code
+
+Let's practice your ability to navigate projects you have not written yourself. We selected 3 examples, but feel free to pick your own:
+
+- [requests](https://github.com/psf/requests/tree/main),
+- [scikit-learn](https://github.com/scikit-learn/scikit-learn/tree/main),
+- [CoDeF](https://github.com/qiuyu96/CoDeF/tree/main).
+
+Your mission is to understand their structure. For each project:
+
+1. Can prepare a one-line description of the purpose of the library _just by looking at its folder structure_?
+2. Without looking at the code, can you identify the main components of the library? What are they?
+3. Where is the main script of the package located? What script would you open to start using the library?
