@@ -76,54 +76,51 @@ In order to make the best use out of this learning path, you should know:
 
 > **Note**: This is just a suggestion. Groups are encouraged to set their own deadlines with their mentors.
 
-Week 01 _(~2.5 hours)_
+Week 01 _(~3 hours)_
 
-- Clean Code Part 1: Concepts and Antipatterns
+- Clean code part 1: Long code is not good code (2h10)
 - Assignment #0
 
-Week 02 _(~2.5 hours)_
+Week 02 _(~2 hours)_
 
-- Clean Code Part 2: Comments and Naming
+- Clean code part 2: Names and Comments (2h00)
 
-Week 03 _(~1.5 hours)_
+Week 03 _(~3 hours)_
 
-- Linting
-- Continuous integration
-
-Week 04 _(~2 hours)_
-
+- Linting (0h30)
+- Continuous integration (0h05)
 - Assignment #1
 
-Week 05 _(~2.0 hours)_
+Week 04 _(~2.5 hours)_
 
-- Git strategies
-- Assessing code quality: reviews and structures
-
-Week 06 _(~2.5 hours)_
-
+- Git strategies (0h20)
+- Assessing code quality: reviews and structures (1h30)
 - Assignment #2
 
-Week 07 _(~2 hours)_
+Week 05 _(~1.5 hours)_
 
-- Testing
+- Testing (1h30)
+
+Week 06 _(~3 hours)_
+
+- Assignment #3 (3h00)
+
+Week 07 _(~2.5 hours)_
+
+- Object-oriented programming (2h30)
 
 Week 08 _(~2 hours)_
 
-- Assignment #3
-
-Week 09 _(~2.5 hours)_
-
-- Object-oriented programming
-
-Week 10 _(~3.5 hours)_
-
-- Text editors
+- Text editors (1h30)
 - Assignment #4
 
-Week 11 _(~2.0 hours)_
+Week 09 _(~3 hours)_
 
-- Design patterns
-- Assignment #5
+- Design patterns (3h00)
+
+Week 10 _(~2.5 hours)_
+
+- Assignment #5 (2h30)
 
 ## Assignments
 
