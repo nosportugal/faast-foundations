@@ -1,6 +1,6 @@
 # Testing
 
-## Introduction to Unit Testing with PyTest (0:35)
+## Introduction to Unit Testing with PyTest (0h35)
 
 ![Unit Testing with PyTest](./../images/unit-test-with-pytest-cover.png)
 

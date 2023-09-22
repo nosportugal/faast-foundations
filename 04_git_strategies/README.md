@@ -21,3 +21,5 @@ Pre-commit uses a git feature named **git hooks** to automatically format your c
 [Link to lesson](https://www.youtube.com/watch?v=psjz6rwzMdk)
 
 Most linters have instructions on how to integrate them with `pre-commit`. For example, here are the instructions for [pylint](https://pylint.pycqa.org/en/latest/user_guide/installation/pre-commit-integration.html).
+
+Feeling up to a challenge? Why not try to add `pre-commit` to your project?
