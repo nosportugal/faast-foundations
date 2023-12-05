@@ -1,3 +1,4 @@
+"""Module with data cleaning functions."""
 # coding: utf-8
 
 import argparse
@@ -76,4 +77,3 @@ if __name__ == "__main__":
         COUNTRY = None
 
     clean_data(COUNTRY)
-    
