@@ -22,7 +22,7 @@ def clean_data(country_filter: str = None):
     :param country_filter: The country based on which the contents of the tsv file are going
                            to be filtered 
     """
-    file_path = "life_expectancy/data/eu_life_expectancy_raw.tsv"
+    file_path = "assignments/life_expectancy/data/eu_life_expectancy_raw.tsv"
     table_key_vars = ["unit", "sex", "age", "region"]
 
     if country_filter is None:
