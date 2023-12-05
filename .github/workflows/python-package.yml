@@ -32,7 +32,7 @@ jobs:
     - name: Lint with flake8
       run: |
         pylint assignments/life_expectancy.cleaning
-        pytest assignments/life_expectancy --cov
+        pytest assignments/life_expectancy
     - name: Test with pytest
       run: |
         pytest
