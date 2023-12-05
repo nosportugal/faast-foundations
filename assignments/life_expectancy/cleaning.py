@@ -1,3 +1,4 @@
+"""Module with data cleaning functions."""
 # coding: utf-8
 
 import argparse
@@ -6,6 +7,10 @@ import re
 
 import pandas as pd
 
+
+"""
+Module for data cleaning operations
+"""
 
 __author__ = "Joaquim Leitão"
 __email__ = "joaquim.leitao@nos.pt"
