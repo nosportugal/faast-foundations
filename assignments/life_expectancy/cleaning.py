@@ -18,8 +18,8 @@ _COUNTRY_ARG_STR = "country"
 
 def _extract_number_from_row(x: str) -> typing.Optional[str]:
     """
-    Extracts an integer or floating point number from one the string representation of one element (column in a given
-    row) of a pandas DataFrame
+    Extracts an integer or floating point number from one the string representation of one element
+    (column in a given row) of a pandas DataFrame
     :param x: The element in the pandas DataFrame
     :return: The integer or floating point number contained in the element, or None othewise
     """
@@ -51,7 +51,7 @@ def clean_data(country_filter: str = None):
     df = pd.read_csv(file_path, sep="[\t,]", engine="python", skiprows=1)
     df.columns = new_columns
 
-    # Deal with NaN values -- Mark columns with invalid value (Just ":" and varying number of spaces)
+    # Deal with NaN values: Mark columns with invalid value (Just ":" and varying number of spaces)
     df = df.replace(re.compile(r"\s*:\s*"), "")
 
     # Unpivot table, making sure we have the columns "unit", "sex", "age", "region", "year" and
@@ -65,7 +65,7 @@ def clean_data(country_filter: str = None):
     # Deal with NaN values - Keep in the string of each column only characters that are digits
     df_unpivot["value"] = df_unpivot["value"].str.strip()
     # df_unpivot["value"] = df_unpivot["value"].str.extract(r"(\d+(\.\d+)?)", expand=False)
-    df_unpivot["value"] = df_unpivot["value"].apply(lambda row: _extract_number_from_row(row))
+    df_unpivot["value"] = df_unpivot["value"].apply(_extract_number_from_row)
 
     df_unpivot = df_unpivot.rename(columns={"variable": "year"})
     # df_unpivot["year"] = pd.to_numeric(df_unpivot["year"], errors="coerce")
