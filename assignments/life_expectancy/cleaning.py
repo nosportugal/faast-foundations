@@ -2,7 +2,6 @@
 # coding: utf-8
 
 import argparse
-import os
 import re
 import typing
 
@@ -14,6 +13,28 @@ __email__ = "joaquim.leitao@nos.pt"
 
 
 _COUNTRY_ARG_STR = "country"
+_INPUT_FILE_PATH_ARG_STR = "input_path"
+_OUTPUT_FILE_PATH_ARG_STR = "output_path"
+_TABLE_KEY_VARS = ["unit", "sex", "age", "region"]
+_DEFAULT_FILE_SEP = "[\t,]"
+
+
+def _get_val_for_key(
+    args_dict: typing.Dict[str, str], arg_key: str
+) -> typing.Optional[str]:
+    """
+    Retrieves the value of a given key in a dictionary/hash table. If the key is not available, then
+    a null/None value is returned
+    :param args_dict: The dictionary/hash table
+    :param arg_key: The key for which the corresponding value is intended to be retrieved
+    :return: The value of the desired key, if it exists in the dictionary/hash table; otherwsie
+             returns null/None
+    """
+    try:
+        arg_val = args_dict[arg_key]
+    except KeyError:
+        arg_val = None
+    return arg_val
 
 
 def _extract_number_from_row(x: str) -> typing.Optional[str]:
@@ -29,70 +50,128 @@ def _extract_number_from_row(x: str) -> typing.Optional[str]:
     return re_pattern_result.group()
 
 
-def clean_data(country_filter: str = None):
+def load_data(file_path: str, file_sep: typing.Optional[str] = None) -> pd.DataFrame:
     """
-    Read tsv file located in "life_expectancy/data/eu_life_expectancy_raw.tsv" and filters
-    contents based on country
-    :param country_filter: The country based on which the contents of the tsv file are going
-                           to be filtered 
+    Reads the contents of the file in the provided path to a pandas DataFrame
+    If the file contains a column with "geo", then it is renamed to "region"
+    :param file_path: The local path to the file
+    :param file_sep: Optional parameter. Character or regex pattern to treat as the delimiter
+    :return: A pandas DataFrame with the file contents
     """
-    file_path = "assignments/life_expectancy/data/eu_life_expectancy_raw.tsv"
-    table_key_vars = ["unit", "sex", "age", "region"]
+    if file_sep is None:
+        file_sep = _DEFAULT_FILE_SEP
 
-    if country_filter is None:
-        country_filter = "PT"
-
-    # Column separators: ",", "\t", "\\" or ":" . Each can be preceded or succedded by optional
-    # spaces
-    # df = pd.read_table(file_path, engine="python", sep="[\t,:]+|")
-    df_header = pd.read_csv(file_path, sep="[\t,]", engine="python")
+    # Column separators can be preceded or succedded by optional spaces
+    df_header = pd.read_csv(file_path, sep=file_sep, engine="python")
     new_columns = [col if "geo" not in col else "region" for col in df_header.columns]
 
-    df = pd.read_csv(file_path, sep="[\t,]", engine="python", skiprows=1)
+    df = pd.read_csv(file_path, sep=file_sep, engine="python", skiprows=1)
     df.columns = new_columns
 
+    return df
+
+
+def clean_data(df: pd.DataFrame, country_filter: str) -> pd.DataFrame:
+    """
+    Performs a variety of operations to the provided pandas DataFrame, in order to clean it for
+    further processing:
+       - Reshapes the DataFrame to have one row per year (instead of multiple years in the same row)
+       - Converts the year and life expectancy value columns to appropriate types (int and float,
+         respectively)
+       - Removes life expectancy values in a given year that are not defined
+       - Filters the DataFrame to only contain rows of a given region, which is given by the
+         "country_filter" argument
+    :param df: The DataFrame to be cleaned
+    :param country_filter: The country based on which the DataFrame is going to be filtered
+    :return: The cleaned DataFrame, after the application of the above described operations
+    """
     # Deal with NaN values: Mark columns with invalid value (Just ":" and varying number of spaces)
     df = df.replace(re.compile(r"\s*:\s*"), "")
 
-    # Unpivot table, making sure we have the columns "unit", "sex", "age", "region", "year" and
-    # "value"
+    # Unpivot table, making sure we have the columns specified in _TABLE_KEY_VARS
     df_unpivot = pd.melt(
         df,
-        id_vars=table_key_vars,
-        value_vars=[col for col in df.columns if col not in table_key_vars]
+        id_vars=_TABLE_KEY_VARS,
+        value_vars=[col for col in df.columns if col not in _TABLE_KEY_VARS],
     )
 
     # Deal with NaN values - Keep in the string of each column only characters that are digits
     df_unpivot["value"] = df_unpivot["value"].str.strip()
-    # df_unpivot["value"] = df_unpivot["value"].str.extract(r"(\d+(\.\d+)?)", expand=False)
     df_unpivot["value"] = df_unpivot["value"].apply(_extract_number_from_row)
 
     df_unpivot = df_unpivot.rename(columns={"variable": "year"})
-    # df_unpivot["year"] = pd.to_numeric(df_unpivot["year"], errors="coerce")
     df_unpivot["year"] = df_unpivot["year"].astype(int)
     df_unpivot["value"] = pd.to_numeric(df_unpivot["value"], errors="coerce")
 
     df_unpivot = df_unpivot.dropna(subset=["value"])
 
     # Filter region
-    df_unpivot = df_unpivot.loc[df_unpivot["region"].str.lower() == country_filter.lower()]
+    df_unpivot = df_unpivot.loc[
+        df_unpivot["region"].str.lower() == country_filter.lower()
+    ]
+    return df_unpivot
 
-    file_path_root = os.path.dirname(file_path)
-    df_unpivot.to_csv(
-        os.path.join(file_path_root, f"{country_filter.lower()}_life_expectancy.csv"),
-        index=False
-    )
+
+def save_data(df: pd.DataFrame, save_file_path: str):
+    """
+    Saves the contents of the provided DataFrame in a specified local path
+    :param df: The DataFrame to be saved
+    :param save_file_path: The local path where the DataFrame is going to be saved
+    """
+    df.to_csv(save_file_path, index=False)
+
+
+def main(
+    _input_path: typing.Optional[str],
+    _country: typing.Optional[str],
+    _output_path: typing.Optional[str],
+):
+    """
+    Module's main executing function. Reads the data from the path specified in "input_path" to a
+    pandas DataFrame, cleans it (reshapes DataFrame, converts columns to appropriate types, removes
+    rows with empty values and retains only records of the country specified in "_country"),
+    and saves to a specified local path
+    :param _input_path: The local path to the file
+    :param _country: The country based on which the DataFrame is going to be filtered
+    :param _output_path: The local path where the cleaned DataFrame is going to be saved
+    """
+    empty_args = []
+    if _input_path is None:
+        empty_args.append("input_path")
+    if _country is None:
+        empty_args.append("country")
+    if _output_path is None:
+        empty_args.append("output_path")
+    if len(empty_args) > 0:
+        raise TypeError(
+            f"Not enough arguments specified. Missing arguments: {empty_args}"
+        )
+
+    df = load_data(_input_path)
+    df = clean_data(df, _country)
+    save_data(df, _output_path)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
     parser.add_argument("-c", "--country", dest=_COUNTRY_ARG_STR, help="Filter country")
+    parser.add_argument(
+        "-ip",
+        "--input_path",
+        dest=_INPUT_FILE_PATH_ARG_STR,
+        help="Local path to life expectancy input data file",
+    )
+    parser.add_argument(
+        "-sp",
+        "--output_path",
+        dest=_OUTPUT_FILE_PATH_ARG_STR,
+        help="Local path where cleaned life expectancy file is saved",
+    )
     args = vars(parser.parse_args())
 
-    try:
-        COUNTRY = args[_COUNTRY_ARG_STR]
-    except KeyError:
-        COUNTRY = None
+    input_path = _get_val_for_key(args, _INPUT_FILE_PATH_ARG_STR)
+    country = _get_val_for_key(args, _COUNTRY_ARG_STR)
+    output_path = _get_val_for_key(args, _OUTPUT_FILE_PATH_ARG_STR)
 
-    clean_data(COUNTRY)
+    main(input_path, country, output_path)
