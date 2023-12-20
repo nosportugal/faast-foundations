@@ -12,9 +12,12 @@ __author__ = "Joaquim Leitão"
 __email__ = "joaquim.leitao@nos.pt"
 
 
+# Defining default values for the module's arguments
 _COUNTRY_ARG_STR = "country"
 _INPUT_FILE_PATH_ARG_STR = "input_path"
 _OUTPUT_FILE_PATH_ARG_STR = "output_path"
+
+# Defining constants for column names and tsv column separator
 _TABLE_KEY_VARS = ["unit", "sex", "age", "region"]
 _DEFAULT_FILE_SEP = "[\t,]"
 
