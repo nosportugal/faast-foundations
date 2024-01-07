@@ -6,7 +6,7 @@ import typing
 
 import pandas as pd
 
-from .defaults import DEFAULT_FILE_SEP
+from life_expectancy.defaults import DEFAULT_FILE_SEP
 
 
 def load_data(file_path: str, file_sep: typing.Optional[str] = None) -> pd.DataFrame:
