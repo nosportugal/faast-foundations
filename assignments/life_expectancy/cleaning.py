@@ -7,19 +7,19 @@ import typing
 
 import pandas as pd
 
+from .defaults import (
+    COUNTRY_ARG_STR,
+    INPUT_FILE_PATH_ARG_STR,
+    OUTPUT_FILE_PATH_ARG_STR,
+    TABLE_KEY_VARS,
+)
+
+from .load_data import load_data
+from .save_data import save_data
+
 
 __author__ = "Joaquim Leitão"
 __email__ = "joaquim.leitao@nos.pt"
-
-
-# Defining default values for the module's arguments
-_COUNTRY_ARG_STR = "country"
-_INPUT_FILE_PATH_ARG_STR = "input_path"
-_OUTPUT_FILE_PATH_ARG_STR = "output_path"
-
-# Defining constants for column names and tsv column separator
-_TABLE_KEY_VARS = ["unit", "sex", "age", "region"]
-_DEFAULT_FILE_SEP = "[\t,]"
 
 
 def _get_val_for_key(
@@ -53,27 +53,6 @@ def _extract_number_from_row(x: str) -> typing.Optional[str]:
     return re_pattern_result.group()
 
 
-def load_data(file_path: str, file_sep: typing.Optional[str] = None) -> pd.DataFrame:
-    """
-    Reads the contents of the file in the provided path to a pandas DataFrame
-    If the file contains a column with "geo", then it is renamed to "region"
-    :param file_path: The local path to the file
-    :param file_sep: Optional parameter. Character or regex pattern to treat as the delimiter
-    :return: A pandas DataFrame with the file contents
-    """
-    if file_sep is None:
-        file_sep = _DEFAULT_FILE_SEP
-
-    # Column separators can be preceded or succedded by optional spaces
-    df_header = pd.read_csv(file_path, sep=file_sep, engine="python")
-    new_columns = [col if "geo" not in col else "region" for col in df_header.columns]
-
-    df = pd.read_csv(file_path, sep=file_sep, engine="python", skiprows=1)
-    df.columns = new_columns
-
-    return df
-
-
 def clean_data(df: pd.DataFrame, country_filter: str) -> pd.DataFrame:
     """
     Performs a variety of operations to the provided pandas DataFrame, in order to clean it for
@@ -84,6 +63,7 @@ def clean_data(df: pd.DataFrame, country_filter: str) -> pd.DataFrame:
        - Removes life expectancy values in a given year that are not defined
        - Filters the DataFrame to only contain rows of a given region, which is given by the
          "country_filter" argument
+       - Reset the DataFrame's index
     :param df: The DataFrame to be cleaned
     :param country_filter: The country based on which the DataFrame is going to be filtered
     :return: The cleaned DataFrame, after the application of the above described operations
@@ -94,8 +74,8 @@ def clean_data(df: pd.DataFrame, country_filter: str) -> pd.DataFrame:
     # Unpivot table, making sure we have the columns specified in _TABLE_KEY_VARS
     df_unpivot = pd.melt(
         df,
-        id_vars=_TABLE_KEY_VARS,
-        value_vars=[col for col in df.columns if col not in _TABLE_KEY_VARS],
+        id_vars=TABLE_KEY_VARS,
+        value_vars=[col for col in df.columns if col not in TABLE_KEY_VARS],
     )
 
     # Deal with NaN values - Keep in the string of each column only characters that are digits
@@ -112,23 +92,17 @@ def clean_data(df: pd.DataFrame, country_filter: str) -> pd.DataFrame:
     df_unpivot = df_unpivot.loc[
         df_unpivot["region"].str.lower() == country_filter.lower()
     ]
+
+    df_unpivot = df_unpivot.reset_index(drop=True)
+
     return df_unpivot
-
-
-def save_data(df: pd.DataFrame, save_file_path: str):
-    """
-    Saves the contents of the provided DataFrame in a specified local path
-    :param df: The DataFrame to be saved
-    :param save_file_path: The local path where the DataFrame is going to be saved
-    """
-    df.to_csv(save_file_path, index=False)
 
 
 def main(
     _input_path: typing.Optional[str],
     _country: typing.Optional[str],
     _output_path: typing.Optional[str],
-):
+) -> pd.DataFrame:
     """
     Module's main executing function. Reads the data from the path specified in "input_path" to a
     pandas DataFrame, cleans it (reshapes DataFrame, converts columns to appropriate types, removes
@@ -137,6 +111,7 @@ def main(
     :param _input_path: The local path to the file
     :param _country: The country based on which the DataFrame is going to be filtered
     :param _output_path: The local path where the cleaned DataFrame is going to be saved
+    :return: The cleaned DataFrame, after the application of the above described operations
     """
     empty_args = []
     if _input_path is None:
@@ -154,27 +129,29 @@ def main(
     df = clean_data(df, _country)
     save_data(df, _output_path)
 
+    return df
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("-c", "--country", dest=_COUNTRY_ARG_STR, help="Filter country")
+    parser.add_argument("-c", "--country", dest=COUNTRY_ARG_STR, help="Filter country")
     parser.add_argument(
         "-ip",
         "--input_path",
-        dest=_INPUT_FILE_PATH_ARG_STR,
+        dest=INPUT_FILE_PATH_ARG_STR,
         help="Local path to life expectancy input data file",
     )
     parser.add_argument(
         "-sp",
         "--output_path",
-        dest=_OUTPUT_FILE_PATH_ARG_STR,
+        dest=OUTPUT_FILE_PATH_ARG_STR,
         help="Local path where cleaned life expectancy file is saved",
     )
     args = vars(parser.parse_args())
 
-    input_path = _get_val_for_key(args, _INPUT_FILE_PATH_ARG_STR)
-    country = _get_val_for_key(args, _COUNTRY_ARG_STR)
-    output_path = _get_val_for_key(args, _OUTPUT_FILE_PATH_ARG_STR)
+    input_path = _get_val_for_key(args, INPUT_FILE_PATH_ARG_STR)
+    country = _get_val_for_key(args, COUNTRY_ARG_STR)
+    output_path = _get_val_for_key(args, OUTPUT_FILE_PATH_ARG_STR)
 
     main(input_path, country, output_path)

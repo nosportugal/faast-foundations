@@ -2,33 +2,72 @@
 import pandas as pd
 import pytest
 
-from . import FIXTURES_DIR, OUTPUT_DIR
-
-
-@pytest.fixture(autouse=True)
-def run_before_and_after_tests() -> None:
-    """Fixture to execute commands before and after a test is run.
-
-    1. Everything you may write before 'yield' will run before the tests
-    2. The command 'yield' marks where tests will happen
-    3. The code after 'yield' will be run after the tests are finished.
-
-    Before you start using your own fixtures, all tests will produce a csv file
-    on the output directory. Since this is bad practise, we are erasing this
-    file to avoid polluting your workspace.
-
-    After refactoring your functions this code will do nothing.
-    """
-    # Setup: fill with any logic you want
-
-    yield # this is where the testing happens
-
-    # Teardown : fill with any logic you want
-    file_path = OUTPUT_DIR / "pt_life_expectancy.csv"
-    file_path.unlink(missing_ok=True)
+from . import FIXTURES_DIR
 
 
 @pytest.fixture(scope="session")
 def pt_life_expectancy_expected() -> pd.DataFrame:
-    """Fixture to load the expected output of the cleaning script"""
+    """
+    Fixture to load the expected output of the cleaning script, when the EU data is provided and
+    filtered for the PT region
+    """
     return pd.read_csv(FIXTURES_DIR / "pt_life_expectancy_expected.csv")
+
+
+@pytest.fixture(scope="session", name="pt_life_expectancy_raw_first")
+def pt_life_expectancy_raw_first_setup() -> pd.DataFrame:
+    """
+    Fixture to load the expected output of the first call to the pandas.read_csv in the cleaning
+    script, when the EU data is provided and filtered for the PT region
+    """
+    return pd.read_csv(
+        "assignments/life_expectancy/data/eu_life_expectancy_raw.tsv",
+        sep="[\t,]",
+        engine="python",
+    )
+
+
+@pytest.fixture(scope="session")
+def pt_life_expectancy_raw(pt_life_expectancy_raw_first: pd.DataFrame) -> pd.DataFrame:
+    """
+    Fixture to load the expected output of the data loading part of the cleaning script, when the EU
+    data is provided and filtered for the PT region
+    """
+    new_columns = [
+        col if "geo" not in col else "region"
+        for col in pt_life_expectancy_raw_first.columns
+    ]
+
+    df = pd.read_csv(
+        "assignments/life_expectancy/data/eu_life_expectancy_raw.tsv",
+        sep="[\t,]",
+        engine="python",
+        skiprows=1,
+    )
+    df.columns = new_columns
+    return df
+
+
+@pytest.fixture(scope="session")
+def eu_life_expectancy_raw_first() -> pd.DataFrame:
+    """
+    Fixture to load a subset of the raw EU input to the cleaning script, with no column name
+    manipulation
+    """
+    file_path = FIXTURES_DIR / "eu_life_expectancy_raw_subset_first.csv"
+    return pd.read_csv(file_path, sep=",", engine="python")
+
+
+@pytest.fixture(scope="session")
+def eu_life_expectancy_raw() -> pd.DataFrame:
+    """
+    Fixture to load the raw EU input to the cleaning script, replacing 'geo' in column with 'region'
+    """
+    file_path = FIXTURES_DIR / "eu_life_expectancy_raw_subset_second.csv"
+    return pd.read_csv(file_path, sep=",", engine="python")
+
+
+@pytest.fixture(scope="session")
+def eu_life_expectancy_expected() -> pd.DataFrame:
+    """Fixture to load the expected EU output of the cleaning script"""
+    return pd.read_csv(FIXTURES_DIR / "eu_life_expectancy_expected_subset.csv")
