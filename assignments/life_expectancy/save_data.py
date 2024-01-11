@@ -4,6 +4,9 @@
 
 import pandas as pd
 
+__author__ = "Joaquim Leitão"
+__email__ = "joaquim.leitao@nos.pt"
+
 
 def save_data(df: pd.DataFrame, save_file_path: str) -> None:
     """
