@@ -19,7 +19,7 @@ If you're on VSCode, you can use the [Python Test Explorer](https://marketplace.
    * **Input fixture**: Let's create our new input fixture by loading the `life_expectancy\data\eu_life_expectancy_raw.tsv`, creating a sample, and saving it as `life_expectancy\tests\fixtures\eu_life_expectancy_raw.tsv` [^1]. Remember that your sample must contain the elements you wish to test. For example, if you want to filter a given region, you fixture has to contain at least one row with that region.
    * **Expected fixture**: Now let's create the fixture for the expected result. Since you have changed `life_expectancy\tests\fixtures\eu_life_expectancy_raw.tsv` to be a sample, now your expected output _should_ be the corresponding image of this sample! Therefore, use your code on that input fixture data to generate the corresponding `life_expectancy\tests\fixtures\eu_life_expectancy_expected.csv` file.
 3. Finally, include the necessary code to import these new fixtures in the `conftest.py` file.
-4. Modify your `main` function so that the cleaned DataFrame is always returned. That will allow you to compare it with the expected fixture.
+4. If you have a main function that loads, cleans and saves the data, ensure that the cleaned DataFrame is always returned. That will allow you to compare it with the expected fixture.
 5. Modify the current test in `test_cleaning.py` to consume these two fixtures instead of the actual data.
 
    > Don't forget to pass the new fixture an argument of the test functions!  
@@ -45,15 +45,15 @@ If you're on VSCode, you can use the [Python Test Explorer](https://marketplace.
    │   │   │   └── <the-fixtures-you-created>
    │   │   ├── test_cleaning.py  # Tests for the cleaning module (assignment 1)
    │   │   └── test_pyproject.py  # Tests for the pyproject installation (this assignment)
-   |   ├── module_1.py  # Your modules
-   |   ├── module_2.py  
+   |   ├── example_module_1.py  # Your modules (give them meaning names ;) )
+   |   ├── example_module_2.py  
    |   ├── ...
-   |   └── module_n.py
+   |   └── example_module_n.py
    |
    └── pyproject.toml
    ```
 
-2. We also have a single integration test, but we should have one unit tests for each of the non-private functions[^3] we have. So, for example, if you have 3 public functions, you should have 3 unit tests.
+2. We also have a single integration test, but we should have one unit tests for each of the non-private functions[^3] we have. So, for example, if you have 3 public functions (for example `load_data`, `save_data`, and `clean_data`), you should have 3 unit tests. If you have a `main` function, test it too.
    1. On the units above, ensure that any test to functions that save data uses a mock
    2. You can do this by patching the `pd.DataFrame.to_csv` method to make the tests not write to a file. Instead, it should just print out a message.
    3. Then, assert that the `pd.DataFrame.to_csv` method is being called. As a bonus, by setting up your tests in this fashion, we can ensure no data transformations modifies any actual data.
