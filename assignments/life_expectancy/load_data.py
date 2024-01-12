@@ -8,6 +8,9 @@ import pandas as pd
 
 from life_expectancy.defaults import DEFAULT_FILE_SEP
 
+__author__ = "Joaquim Leitão"
+__email__ = "joaquim.leitao@nos.pt"
+
 
 def load_data(file_path: str, file_sep: typing.Optional[str] = None) -> pd.DataFrame:
     """
