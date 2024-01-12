@@ -10,6 +10,9 @@ from life_expectancy.defaults import DEFAULT_FILE_SEP
 from life_expectancy.load_data import load_data
 from . import OUTPUT_DIR
 
+__author__ = "Joaquim Leitão"
+__email__ = "joaquim.leitao@nos.pt"
+
 
 def test_load_data(
     eu_life_expectancy_raw_first: pd.DataFrame, eu_life_expectancy_raw: pd.DataFrame

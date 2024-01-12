@@ -1,4 +1,5 @@
 """Pytest configuration file"""
+import typing
 import pandas as pd
 import pytest
 
@@ -71,3 +72,58 @@ def eu_life_expectancy_raw() -> pd.DataFrame:
 def eu_life_expectancy_expected() -> pd.DataFrame:
     """Fixture to load the expected EU output of the cleaning script"""
     return pd.read_csv(FIXTURES_DIR / "eu_life_expectancy_expected_subset.csv")
+
+
+@pytest.fixture(scope="session")
+def expected_regions() -> typing.List[str]:
+    """Retrieve the list of expected countries"""
+    return [
+        "AL",
+        "AM",
+        "AT",
+        "AZ",
+        "BE",
+        "BG",
+        "BY",
+        "CH",
+        "CY",
+        "CZ",
+        "DE",
+        "DE_TOT",
+        "DK",
+        "EE",
+        "EL",
+        "ES",
+        "FI",
+        "FR",
+        "FX",
+        "GE",
+        "HR",
+        "HU",
+        "IE",
+        "IS",
+        "IT",
+        "LI",
+        "LT",
+        "LU",
+        "LV",
+        "MD",
+        "ME",
+        "MK",
+        "MT",
+        "NL",
+        "NO",
+        "PL",
+        "PT",
+        "RO",
+        "RS",
+        "RU",
+        "SE",
+        "SI",
+        "SK",
+        "SM",
+        "TR",
+        "UA",
+        "UK",
+        "XK",
+    ]
