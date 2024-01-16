@@ -89,7 +89,6 @@ def expected_regions() -> typing.List[str]:
         "CY",
         "CZ",
         "DE",
-        "DE_TOT",
         "DK",
         "EE",
         "EL",

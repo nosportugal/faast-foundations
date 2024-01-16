@@ -79,6 +79,7 @@ class Region(Enum):
         :return: List of string values, containing all the valid regions
         """
         invalid_countries = [
+            cls.DE_TOT,
             cls.EEA30_2007,
             cls.EU27_2007,
             cls.EU27_2020,

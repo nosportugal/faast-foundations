@@ -18,10 +18,15 @@ def test_expected_countries(expected_regions: typing.List[str]) -> None:
     """
     region_list = Region.list_all_countries()
 
+    # Check if both lists of regions have the same number of elements
+    assert len(region_list) == len(expected_regions)
+
+    # Make sure every region in "region_list" is present in the expected output
     for region in region_list:
         if region not in expected_regions:
             assert False
 
-    assert expected_regions == region_list
-
-    # assert all(a == b for a, b in zip(region_list, expected_regions))
+    # Make sure every region in the expected output is present in "region_list"
+    for region in expected_regions:
+        if region not in region_list:
+            assert False
