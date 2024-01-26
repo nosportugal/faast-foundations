@@ -8,10 +8,14 @@ import random
 
 import pandas as pd
 
-import life_expectancy.cleaning
+import life_expectancy.main
+from life_expectancy.region import Region
+
+__author__ = "Joaquim Leitão"
+__email__ = "joaquim.leitao@nos.pt"
 
 
-def _at_least_one_region(rows: typing.List[str], desired_region: str) -> bool:
+def _at_least_one_region(rows: typing.List[str], desired_region: Region) -> bool:
     """
     Checks if there is at least one entry for a given region in the extract provided
     :param rows: The extract to be analysed
@@ -20,14 +24,14 @@ def _at_least_one_region(rows: typing.List[str], desired_region: str) -> bool:
              otherwise
     """
     for row in rows:
-        if desired_region in row:
+        if desired_region.value.upper() in row:
             return True
     return False
 
 
 def generate_data_subset(
     _input_path: str,
-    _desired_region: str,
+    _desired_region: Region,
     _percent_rows_select: float,
     _output_path: str,
 ) -> None:
@@ -112,14 +116,14 @@ def generate_fixtures_csv_read(
 if __name__ == "__main__":
     generate_data_subset(
         _input_path="../data/eu_life_expectancy_raw.tsv",
-        _desired_region="PT",
+        _desired_region=Region.PT,
         _percent_rows_select=0.3,
         _output_path="fixtures/eu_life_expectancy_raw_subset.tsv",
     )
 
-    life_expectancy.cleaning.main(
+    life_expectancy.main.main(
         _input_path="fixtures/eu_life_expectancy_raw_subset.tsv",
-        _country="PT",
+        _country=Region.PT,
         _output_path="fixtures/eu_life_expectancy_expected_subset.csv",
     )
 

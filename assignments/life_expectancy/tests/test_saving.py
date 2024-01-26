@@ -9,6 +9,9 @@ import pandas as pd
 from life_expectancy.save_data import save_data
 from . import OUTPUT_DIR
 
+__author__ = "Joaquim Leitão"
+__email__ = "joaquim.leitao@nos.pt"
+
 
 def test_save_data(eu_life_expectancy_expected: pd.DataFrame) -> None:
     """

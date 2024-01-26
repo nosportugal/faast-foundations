@@ -1,10 +1,17 @@
-"""Tests for the entire cleaning module"""
+"""End-to-end tests for the life_expectancy module"""
+# coding: utf-8
+
+
 from unittest.mock import patch
 
 import pandas as pd
 
-from life_expectancy.cleaning import main
+from life_expectancy.main import main
+from life_expectancy.region import Region
 from . import OUTPUT_DIR
+
+__author__ = "Joaquim Leitão"
+__email__ = "joaquim.leitao@nos.pt"
 
 
 def test_main(
@@ -31,7 +38,7 @@ def test_main(
 
             pt_life_expectancy_obtained = main(
                 _input_path="assignments/life_expectancy/data/eu_life_expectancy_raw.tsv",
-                _country="PT",
+                _country=Region.PT,
                 _output_path="assignments/life_expectancy/data/pt_life_expectancy.csv",
             )
 
