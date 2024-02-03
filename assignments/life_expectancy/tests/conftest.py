@@ -19,7 +19,7 @@ def pt_life_expectancy_expected() -> pd.DataFrame:
 def pt_life_expectancy_raw_first_setup() -> pd.DataFrame:
     """
     Fixture to load the expected output of the first call to the pandas.read_csv in the cleaning
-    script, when the EU data is provided and filtered for the PT region
+    script, when the TSV representation strategy is selected, and the EU data is provided
     """
     return pd.read_csv(
         "assignments/life_expectancy/data/eu_life_expectancy_raw.tsv",
@@ -31,8 +31,8 @@ def pt_life_expectancy_raw_first_setup() -> pd.DataFrame:
 @pytest.fixture(scope="session")
 def pt_life_expectancy_raw(pt_life_expectancy_raw_first: pd.DataFrame) -> pd.DataFrame:
     """
-    Fixture to load the expected output of the data loading part of the cleaning script, when the EU
-    data is provided and filtered for the PT region
+    Fixture to load the expected output of the data loading part of the cleaning script, when the
+    TSV representation strategy is selected, and the EU data is provided
     """
     new_columns = [
         col if "geo" not in col else "region"
@@ -47,6 +47,15 @@ def pt_life_expectancy_raw(pt_life_expectancy_raw_first: pd.DataFrame) -> pd.Dat
     )
     df.columns = new_columns
     return df
+
+
+@pytest.fixture(scope="session")
+def eu_life_expectancy_raw_json() -> pd.DataFrame:
+    """
+    Fixture to load the expected output of the data loading part of the cleaning script, when the
+    JSON representation strategy is selected, and the EU data is provided
+    """
+    return pd.read_json("assignments/life_expectancy/data/eurostat_life_expect.json")
 
 
 @pytest.fixture(scope="session")

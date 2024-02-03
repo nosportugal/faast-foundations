@@ -8,6 +8,8 @@ import random
 
 import pandas as pd
 
+from life_expectancy.defaults import DEFAULT_OUTPUT_COLUMNS
+from life_expectancy.load_data import TSVRepresentationStrategy
 import life_expectancy.main
 from life_expectancy.region import Region
 
@@ -124,7 +126,10 @@ if __name__ == "__main__":
     life_expectancy.main.main(
         _input_path="fixtures/eu_life_expectancy_raw_subset.tsv",
         _country=Region.PT,
+        _representation_strategy=TSVRepresentationStrategy(),
+        _region_col_name="region",
         _output_path="fixtures/eu_life_expectancy_expected_subset.csv",
+        _output_columns=DEFAULT_OUTPUT_COLUMNS,
     )
 
     # Generate fixture to represent output of the first pandas.read_csv call for the entire EU data:
