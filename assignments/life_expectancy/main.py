@@ -19,22 +19,14 @@ from life_expectancy.defaults import (
 )
 from life_expectancy.cleaning import clean_data
 from life_expectancy.load_data import (
+    convert_representation_strategy,
     DataRepresentationStrategy,
-    JSONRepresentationStrategy,
-    TSVRepresentationStrategy,
 )
 from life_expectancy.region import Region
 from life_expectancy.save_data import save_data
 
 __author__ = "Joaquim Leitão"
 __email__ = "joaquim.leitao@nos.pt"
-
-
-REPRESENTATION_STRATEGIES = {
-    "csv": TSVRepresentationStrategy,
-    "tsv": TSVRepresentationStrategy,
-    "json": JSONRepresentationStrategy,
-}
 
 
 def _get_val_for_key(
@@ -66,26 +58,6 @@ def _convert_country_type(country_val: typing.Optional[str]) -> typing.Optional[
     """
     if (country_val is not None) and (Region.has_member_key(country_val)):
         return Region(country_val.upper())
-    return None
-
-
-def _convert_representation_strategy(
-    representation_val: typing.Optional[str],
-) -> typing.Optional[DataRepresentationStrategy]:
-    """
-    Checks if the representation strategy, provided as a string, is among the supported
-    strategies. If so, it creates and returns the appropriate strategy, otherwise
-    return None
-    :param representation_val: The string containing the desired representation strategy
-    :return: The appropriate instance for the desired representation, if it is supported,
-             otherwise None
-    """
-    if representation_val is not None:
-        # Convert representation_val to lower case
-        representation_val = representation_val.lower()
-        if representation_val in REPRESENTATION_STRATEGIES:
-            # Get and instantiate the desired representation strategy
-            return REPRESENTATION_STRATEGIES[representation_val]()
     return None
 
 
@@ -198,7 +170,7 @@ if __name__ == "__main__":
     if not isinstance(representation_strategy_str, str):
         REPRESENTATION_STRATEGY = None
     else:
-        REPRESENTATION_STRATEGY = _convert_representation_strategy(
+        REPRESENTATION_STRATEGY = convert_representation_strategy(
             representation_strategy_str
         )
     if REPRESENTATION_STRATEGY is None:

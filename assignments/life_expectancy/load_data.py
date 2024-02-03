@@ -137,3 +137,30 @@ class TSVRepresentationStrategy:
         :return: Class instance string representation
         """
         return self.__class__.__name__
+
+
+REPRESENTATION_STRATEGIES = {
+    "csv": TSVRepresentationStrategy,
+    "tsv": TSVRepresentationStrategy,
+    "json": JSONRepresentationStrategy,
+}
+
+
+def convert_representation_strategy(
+    representation_val: typing.Optional[str],
+) -> typing.Optional[DataRepresentationStrategy]:
+    """
+    Checks if the representation strategy, provided as a string, is among the supported
+    strategies. If so, it creates and returns the appropriate strategy, otherwise
+    return None
+    :param representation_val: The string containing the desired representation strategy
+    :return: The appropriate instance for the desired representation, if it is supported,
+             otherwise None
+    """
+    if representation_val is not None:
+        # Convert representation_val to lower case
+        representation_val = representation_val.lower()
+        if representation_val in REPRESENTATION_STRATEGIES:
+            # Get and instantiate the desired representation strategy
+            return REPRESENTATION_STRATEGIES[representation_val]()
+    return None
