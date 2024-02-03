@@ -10,9 +10,14 @@ __email__ = "joaquim.leitao@nos.pt"
 COUNTRY_ARG_STR = "country"
 INPUT_FILE_PATH_ARG_STR = "input_path"
 OUTPUT_FILE_PATH_ARG_STR = "output_path"
+REPRESENTATION_STRATEGY_ARG_STR = "representation_strategy"
+REGION_COL_NAME_ARG_STR = "region_column_name"
+OUTPUT_COLUMNS_ARG_STR = "output_columns"
 
 # Defining constants for column names and tsv column separator
 TABLE_KEY_VARS = ["unit", "sex", "age", "region"]
 DEFAULT_FILE_SEP = "[\t,]"
 
 DEFAULT_REGION_COL_NAME = "region"
+
+DEFAULT_OUTPUT_COLUMNS = ["unit", "sex", "age", "region", "year", "value"]
