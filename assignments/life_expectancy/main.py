@@ -10,10 +10,8 @@ import pandas as pd
 from life_expectancy.defaults import (
     COUNTRY_ARG_STR,
     DEFAULT_REGION_COL_NAME,
-    DEFAULT_OUTPUT_COLUMNS,
     INPUT_FILE_PATH_ARG_STR,
     OUTPUT_FILE_PATH_ARG_STR,
-    OUTPUT_COLUMNS_ARG_STR,
     REPRESENTATION_STRATEGY_ARG_STR,
     REGION_COL_NAME_ARG_STR,
 )
@@ -67,7 +65,6 @@ def main(
     _representation_strategy: typing.Optional[DataRepresentationStrategy],
     _region_col_name: typing.Optional[str],
     _output_path: typing.Optional[str],
-    _output_columns: typing.Optional[typing.List[str]],
 ) -> pd.DataFrame:
     """
     Module's main executing function. Reads the data from the path specified in "input_path"
@@ -80,7 +77,6 @@ def main(
                                      provided path
     :param _region_col_name: The desired name for the region/country column of the data
     :param _output_path: The local path where the cleaned DataFrame is going to be saved
-    :param _output_columns: The columns to include in the cleaned DataFrame
     :return: The cleaned DataFrame, after the application of the above described operations
     """
     empty_args = []
@@ -99,12 +95,8 @@ def main(
 
     if _region_col_name is None:
         _region_col_name = DEFAULT_REGION_COL_NAME
-    if _output_columns is None:
-        _output_columns = DEFAULT_OUTPUT_COLUMNS
 
-    df = _representation_strategy.load_data(
-        _input_path, _region_col_name, _output_columns
-    )
+    df = _representation_strategy.load_data(_input_path, _region_col_name)
     df = clean_data(df, _country)
     save_data(df, _output_path)
 
@@ -140,13 +132,6 @@ if __name__ == "__main__":
         dest=REGION_COL_NAME_ARG_STR,
         help="Desired name for the region/country column",
     )
-    parser.add_argument(
-        "-oc",
-        "--output_columns",
-        dest=OUTPUT_COLUMNS_ARG_STR,
-        type=lambda arg: arg.split(","),
-        help="Desired columns in the saved DataFrame",
-    )
     args = vars(parser.parse_args())
 
     input_path = _get_val_for_key(args, INPUT_FILE_PATH_ARG_STR)
@@ -156,7 +141,6 @@ if __name__ == "__main__":
         args, REPRESENTATION_STRATEGY_ARG_STR
     )
     region_col_name = _get_val_for_key(args, REGION_COL_NAME_ARG_STR)
-    output_columns = _get_val_for_key(args, OUTPUT_COLUMNS_ARG_STR)
 
     # Convert country to Region type
     if not isinstance(country_str, str):
@@ -182,7 +166,6 @@ if __name__ == "__main__":
         (not isinstance(input_path, str))
         or (not isinstance(region_col_name, str))
         or (not isinstance(output_path, str))
-        or (not isinstance(output_columns, list))
     ):
         raise ValueError("Invalid parameters provided to the main function!")
 
@@ -192,5 +175,4 @@ if __name__ == "__main__":
         REPRESENTATION_STRATEGY,
         region_col_name,
         output_path,
-        output_columns,
     )

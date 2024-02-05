@@ -6,7 +6,7 @@ import typing
 
 import pandas as pd
 
-from life_expectancy.defaults import DEFAULT_FILE_SEP
+from life_expectancy.defaults import DEFAULT_FILE_SEP, TABLE_KEY_VARS
 
 __author__ = "Joaquim Leitão"
 __email__ = "joaquim.leitao@nos.pt"
@@ -22,7 +22,6 @@ class DataRepresentationStrategy(typing.Protocol):
         self,
         file_path: str,
         region_col_name: str,
-        desired_columns: typing.Optional[typing.List[str]],
     ) -> pd.DataFrame:
         """
         Generic method to load the data from the specified file path, based on the supported
@@ -30,8 +29,6 @@ class DataRepresentationStrategy(typing.Protocol):
         :param file_path: The local path to the file
         :param region_col_name: The name of the column containing the region/country in the
                                 provided data
-        :param desired_columns: A list of string objects containing the names of the columns to be
-                                loaded from the provided data file
         :return: A pandas DataFrame with the file contents
         """
 
@@ -50,7 +47,6 @@ class JSONRepresentationStrategy:
         self,
         file_path: str,
         region_col_name: str,
-        desired_columns: typing.Optional[typing.List[str]],
     ) -> pd.DataFrame:
         """
         Reads the contents of the JSON file in the provided path to a pandas DataFrame
@@ -59,30 +55,42 @@ class JSONRepresentationStrategy:
         :param file_path: The local path to the file
         :param region_col_name: The name of the column containing the region/country in the
                                 provided data
-        :param desired_columns: A list of string objects containing the names of the columns to be
-                                loaded from the provided data file
-        :return: A pandas DataFrame with the file contents
+        :return: A pandas DataFrame with the file contents in a format that can be processed
+                 by the cleaning module
         """
+        year_col_name = "year"
+        value_col_name = "life_expectancy"
+        region_obtained_col_name = "country"
+
         df = pd.read_json(file_path)
         df: pd.DataFrame = typing.cast(pd.DataFrame, df)
 
-        # Change "country" to <region_col_name> and "life_expectancy" to "value"
-        new_columns = {}
+        # Need to output a dataframe with the columns defined in defaults.TABLE_KEY_VARS +
+        # 1 column per year with the value in each year -- Use pivot_table
+
+        # TABLE_KEY_VARS contains "region" but the JSON contains "country", need to convert it!
         # pylint: disable=E1101
-        for col in df.columns:
-            if ("country" in col) and (
-                (desired_columns is None) or (region_col_name in desired_columns)
-            ):
-                new_columns[col] = region_col_name
-            elif ("life_expectancy" in col) and (
-                (desired_columns is None) or ("value" in desired_columns)
-            ):
-                new_columns[col] = "value"
-            elif (desired_columns is None) or (col in desired_columns):
-                new_columns[col] = col
-        # Need to select the keys in "new_columns" and change their names to the
-        # values in "new_columns"
-        df = df.rename(columns=new_columns)[new_columns.values()]
+        df = df.rename(columns={region_obtained_col_name: region_col_name})
+        df = df.pivot_table(
+            index=TABLE_KEY_VARS,
+            columns=year_col_name,
+            values=value_col_name,
+            aggfunc="first",
+        )
+
+        # Replace NaN values
+        df = df.fillna(":")
+        df = df.replace(float("nan"), ":")
+
+        # Reset index to match the desired format
+        df = df.reset_index()
+
+        # Rename columns to match the desired format
+        df.columns.name = None  # Remove the 'year' label
+        df.columns = TABLE_KEY_VARS + [
+            str(col) for col in df.columns[len(TABLE_KEY_VARS) :]
+        ]
+
         return df
 
     def __str__(self) -> str:
@@ -100,17 +108,16 @@ class TSVRepresentationStrategy:
         self,
         file_path: str,
         region_col_name: str,
-        desired_columns: typing.Optional[typing.List[str]],
     ) -> pd.DataFrame:
         """
         Reads the contents of the TSV file in the provided path to a pandas DataFrame
         If the file contains a column with "geo", then it is renamed to the value provided in the
         <region_col_name> parameter
+        Each row of the pandas Dataframe will contain values for different years, for a given set of
+        'key' characteristics, e.g. age, region, sex, etc
         :param file_path: The local path to the file
         :param region_col_name: The name of the column containing the region/country in the provided
                                 data
-        :param desired_columns: A list of string objects containing the names of the columns to be
-                                loaded from the provided data file
         :return: A pandas DataFrame with the file contents
         """
         file_sep = DEFAULT_FILE_SEP
@@ -118,11 +125,9 @@ class TSVRepresentationStrategy:
         df_header = pd.read_csv(file_path, sep=file_sep, engine="python")
         new_columns = {}
         for col in df_header.columns:
-            if ("geo" in col) and (
-                (desired_columns is None) or (region_col_name in desired_columns)
-            ):
+            if "geo" in col:
                 new_columns[col] = region_col_name
-            elif (desired_columns is None) or (col in desired_columns):
+            else:
                 new_columns[col] = col
 
         df = pd.read_csv(file_path, sep=file_sep, engine="python", skiprows=1)

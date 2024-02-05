@@ -6,7 +6,6 @@ from unittest.mock import patch
 
 import pandas as pd
 
-from life_expectancy.defaults import DEFAULT_OUTPUT_COLUMNS
 from life_expectancy.load_data import (
     JSONRepresentationStrategy,
     TSVRepresentationStrategy,
@@ -40,8 +39,7 @@ def test_main_json(
                 _country=Region.PT,
                 _representation_strategy=JSONRepresentationStrategy(),
                 _region_col_name="region",
-                _output_path="assignments/life_expectancy/data/pt_life_expectancy.csv",
-                _output_columns=DEFAULT_OUTPUT_COLUMNS,
+                _output_path="assignments/life_expectancy/data/pt_life_expectancy_json.csv",
             )
 
             pd.testing.assert_frame_equal(
@@ -87,7 +85,6 @@ def test_main_csv(
                 _representation_strategy=TSVRepresentationStrategy(),
                 _region_col_name="region",
                 _output_path="assignments/life_expectancy/data/pt_life_expectancy.csv",
-                _output_columns=DEFAULT_OUTPUT_COLUMNS,
             )
 
             pd.testing.assert_frame_equal(

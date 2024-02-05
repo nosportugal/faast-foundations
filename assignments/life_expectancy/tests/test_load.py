@@ -10,7 +10,6 @@ from life_expectancy.load_data import (
     JSONRepresentationStrategy,
     TSVRepresentationStrategy,
 )
-from life_expectancy.defaults import DEFAULT_OUTPUT_COLUMNS
 from . import OUTPUT_DIR
 
 __author__ = "Joaquim Leitão"
@@ -29,7 +28,6 @@ def test_load_data_json(eu_life_expectancy_raw_json: pd.DataFrame) -> None:
         JSONRepresentationStrategy().load_data(
             os.path.join(OUTPUT_DIR, "eurostat_life_expect.json"),
             "region",
-            DEFAULT_OUTPUT_COLUMNS,
         )
         read_json_mock.assert_called_once()
 
@@ -60,6 +58,5 @@ def test_load_data_csv(
         TSVRepresentationStrategy().load_data(
             os.path.join(OUTPUT_DIR, "eu_life_expectancy_raw.tsv"),
             "region",
-            DEFAULT_OUTPUT_COLUMNS,
         )
         assert read_csv_mock.call_count == 2
