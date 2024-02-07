@@ -59,6 +59,15 @@ def eu_life_expectancy_raw_json() -> pd.DataFrame:
 
 
 @pytest.fixture(scope="session")
+def eu_life_expectancy_raw_json_expected() -> pd.DataFrame:
+    """
+    Fixture to load the expected output of the cleaning script, when the
+    JSON representation strategy is selected, and the EU data is provided
+    """
+    return pd.read_csv(FIXTURES_DIR / "eu_life_expectancy_expected_json_expect.csv")
+
+
+@pytest.fixture(scope="session")
 def eu_life_expectancy_raw_first() -> pd.DataFrame:
     """
     Fixture to load a subset of the raw EU input to the cleaning script, with no column name
