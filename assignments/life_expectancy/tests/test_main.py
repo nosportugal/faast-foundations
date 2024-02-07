@@ -20,19 +20,19 @@ __email__ = "joaquim.leitao@nos.pt"
 
 def test_main_json(
     eu_life_expectancy_raw_json: pd.DataFrame,
-    pt_life_expectancy_expected: pd.DataFrame,
+    eu_life_expectancy_raw_json_expected: pd.DataFrame,
 ) -> None:
     """
     Run the package's main function, setting the data representation strategy as JSON, and
     comparing the output to the expected output
     :param eu_life_expectancy_raw_json: Expected output of the data loading part
-    :param pt_life_expectancy_expected: Expected output of the `clean_data` function
+    :param eu_life_expectancy_raw_json_expected: Expected output of the `clean_data` function
     """
-    pt_life_expectancy_actual = pd.read_csv(OUTPUT_DIR / "pt_life_expectancy.csv")
+
     with patch("pandas.DataFrame.to_csv") as to_csv_mock:
         to_csv_mock.side_effect = print("\nIn save_data!")
         with patch("pandas.read_json") as read_json_mock:
-            read_json_mock.side_effect = eu_life_expectancy_raw_json
+            read_json_mock.return_value = eu_life_expectancy_raw_json
 
             pt_life_expectancy_obtained = main(
                 _input_path="assignments/life_expectancy/data/eurostat_life_expect.json",
@@ -43,11 +43,7 @@ def test_main_json(
             )
 
             pd.testing.assert_frame_equal(
-                pt_life_expectancy_actual, pt_life_expectancy_expected
-            )
-
-            pd.testing.assert_frame_equal(
-                pt_life_expectancy_obtained, pt_life_expectancy_expected
+                pt_life_expectancy_obtained, eu_life_expectancy_raw_json_expected
             )
 
             assert to_csv_mock.call_count == 1
