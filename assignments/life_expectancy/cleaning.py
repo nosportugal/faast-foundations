@@ -21,6 +21,8 @@ def _extract_number_from_row(x: str) -> typing.Optional[str]:
     :param x: The element in the pandas DataFrame
     :return: The integer or floating point number contained in the element, or None othewise
     """
+    x = str(x)
+    x = x.strip()
     re_pattern_result = re.search(r"(\d+(\.\d+)?)", x)
     if re_pattern_result is None:
         return None
@@ -54,7 +56,8 @@ def clean_data(df: pd.DataFrame, country_filter: Region) -> pd.DataFrame:
     )
 
     # Deal with NaN values - Keep in the string of each column only characters that are digits
-    df_unpivot["value"] = df_unpivot["value"].str.strip()
+    # df_unpivot["value"] = df_unpivot["value"].str.strip()
+    # df_unpivot["value"] = df_unpivot["value"].fillna("")
     df_unpivot["value"] = df_unpivot["value"].apply(_extract_number_from_row)
 
     df_unpivot = df_unpivot.rename(columns={"variable": "year"})
