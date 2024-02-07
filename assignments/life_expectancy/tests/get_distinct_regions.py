@@ -2,7 +2,7 @@
 # coding: utf-8
 
 from life_expectancy.load_data import TSVRepresentationStrategy
-from life_expectancy.defaults import DEFAULT_REGION_COL_NAME, DEFAULT_OUTPUT_COLUMNS
+from life_expectancy.defaults import DEFAULT_REGION_COL_NAME
 
 __author__ = "Joaquim Leitão"
 __email__ = "joaquim.leitao@nos.pt"
@@ -11,7 +11,7 @@ __email__ = "joaquim.leitao@nos.pt"
 if __name__ == "__main__":
     # Load entire raw data
     raw_df = TSVRepresentationStrategy().load_data(
-        "../data/eu_life_expectancy_raw.tsv", "region", DEFAULT_OUTPUT_COLUMNS
+        "../data/eu_life_expectancy_raw.tsv", "region"
     )
 
     # Select distinct values from column "region"
